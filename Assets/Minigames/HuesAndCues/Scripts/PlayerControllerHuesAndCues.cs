@@ -89,18 +89,19 @@ public class PlayerControllerHuesAndCues : MonoBehaviour
     {
         if (_input == Vector3.zero) return;
 
-        Quaternion rot = Quaternion.LookRotation(_input.ToIso(), Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
+        Quaternion rot = Quaternion.LookRotation(_input, Vector3.up);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTimes); // smooth rotation
+        transform.rotation = rot;  //instant rotation, no smoothing
     }
 
     private void Move()
     {
         if(_isDashing)
         {
-            _characterController.Move(_input.ToIso() * _input.normalized.magnitude * dashingSpeed * Time.deltaTime);
+            _characterController.Move(transform.forward * _input.normalized.magnitude * dashingSpeed * Time.deltaTime);
             return;
         }
-        _characterController.Move(_input.ToIso() * _input.normalized.magnitude * _currentSpeed * Time.deltaTime);
+        _characterController.Move(transform.forward * _input.normalized.magnitude * _currentSpeed * Time.deltaTime);
     }
 
     private void GatherInput()
@@ -109,10 +110,4 @@ public class PlayerControllerHuesAndCues : MonoBehaviour
         _input = new Vector3(input.x, 0, input.y);
         _dashInput = _playerInputActions.Player.Sprint.IsPressed();
     }
-}
-
-public static class Helpers
-{
-    private static Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
-    public static Vector3 ToIso(this Vector3 input) => _isoMatrix.MultiplyPoint3x4(input);
 }
