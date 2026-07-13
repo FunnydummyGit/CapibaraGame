@@ -11,6 +11,9 @@ public class PickerFollowsCharacterScript : MonoBehaviour
     [SerializeField]
     CharacterController characterController;
 
+    [SerializeField]
+    bool isSlider;
+
     private bool isFollowing = false;
 
     RectTransform parentRect;
@@ -84,7 +87,11 @@ public class PickerFollowsCharacterScript : MonoBehaviour
 
             // Clamp inside the panel rect
             Rect rect = parentRect.rect;
-            float clampedX = Mathf.Clamp(localPoint.x, rect.xMin, rect.xMax);
+            float clampedX = 0;
+            if (!isSlider)
+            {
+                clampedX = Mathf.Clamp(localPoint.x, rect.xMin, rect.xMax);
+            }
             float clampedY = Mathf.Clamp(localPoint.y, rect.yMin, rect.yMax);
 
             // Always keep Z = 0 in local space so the cursor sits flush on the panel
