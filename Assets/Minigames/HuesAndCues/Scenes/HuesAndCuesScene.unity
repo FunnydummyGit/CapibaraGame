@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 463620317}
   - component: {fileID: 463620316}
   - component: {fileID: 463620315}
+  - component: {fileID: 463620318}
   m_Layer: 0
   m_Name: ColorPicker
   m_TagString: Untagged
@@ -372,6 +373,27 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &463620318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463620313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50851ac21234ead41bd99f309c1830eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColourPickerControl
+  currentHue: 0
+  currentSat: 0
+  currentVal: 0
+  hueImage: {fileID: 1671511944}
+  satValImage: {fileID: 1354056295}
+  outputImage: {fileID: 244504289}
+  hueSlider: {fileID: 1030905057}
+  hexInputField: {fileID: 603934303}
+  changeThisColour: {fileID: 1843657570}
 --- !u!1 &548144819
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +985,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 463620313}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1030905058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,6 +1071,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1115309982 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6569033338701713690, guid: d8c9c6051b159a344862ad314b69f543, type: 3}
+  m_PrefabInstance: {fileID: 3505781533159490110}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115309975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e47f4e905f6304899158e18baab3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1354056292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,7 +1340,6 @@ GameObject:
   - component: {fileID: 1506158634}
   - component: {fileID: 1506158633}
   - component: {fileID: 1506158632}
-  - component: {fileID: 1506158631}
   m_Layer: 0
   m_Name: Color Picker Plane
   m_TagString: Untagged
@@ -1303,27 +1347,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1506158631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506158630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50851ac21234ead41bd99f309c1830eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ColourPickerControl
-  currentHue: 100
-  currentSat: 100
-  currentVal: 100
-  hueImage: {fileID: 1354056295}
-  satValImage: {fileID: 1671511944}
-  outputImage: {fileID: 244504289}
-  hueSlider: {fileID: 1030905057}
-  hexInputField: {fileID: 603934303}
-  changeThisColour: {fileID: 1843657570}
 --- !u!64 &1506158632
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1432,6 +1455,7 @@ GameObject:
   - component: {fileID: 1671511946}
   - component: {fileID: 1671511947}
   - component: {fileID: 1671511948}
+  - component: {fileID: 1671511949}
   m_Layer: 5
   m_Name: SVPanel
   m_TagString: Untagged
@@ -1507,6 +1531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SVImageContril
   pickerImage: {fileID: 548144821}
+  playerController: {fileID: 0}
 --- !u!65 &1671511947
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1543,6 +1568,20 @@ MonoBehaviour:
   cursorTransform: {fileID: 548144820}
   characterController: {fileID: 1115309978}
   isSlider: 0
+--- !u!114 &1671511949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671511942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44579d4844b6f984fb84a23f1aaf74ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVImageContril
+  pickerImage: {fileID: 548144821}
+  playerController: {fileID: 1115309982}
 --- !u!1 &1781681592
 GameObject:
   m_ObjectHideFlags: 0

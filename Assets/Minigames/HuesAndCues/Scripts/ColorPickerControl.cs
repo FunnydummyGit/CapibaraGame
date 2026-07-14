@@ -120,7 +120,5 @@ public class ColourPickerControl : MonoBehaviour
         }
 
         svTexture.Apply();
-
-        UpdateSVImage();
     }
 }

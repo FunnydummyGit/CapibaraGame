@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Assemblies;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider))]
 public class PickerFollowsCharacterScript : MonoBehaviour
@@ -14,9 +12,10 @@ public class PickerFollowsCharacterScript : MonoBehaviour
     [SerializeField]
     bool isSlider;
 
-    private bool isFollowing = false;
+    protected bool isFollowing = false;
+    public bool IsFollowing => isFollowing;
 
-    RectTransform parentRect;
+    private RectTransform parentRect;
     Canvas parentCanvas;
     Vector3 worldPos;
 
@@ -30,7 +29,6 @@ public class PickerFollowsCharacterScript : MonoBehaviour
 
         parentRect = cursorTransform.parent as RectTransform;
         parentCanvas = cursorTransform.GetComponentInParent<Canvas>();
-
     }
 
     private void Update()

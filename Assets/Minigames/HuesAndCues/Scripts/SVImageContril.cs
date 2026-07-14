@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class SVImageContril : MonoBehaviour, IDragHandler, IPointerClickHandler
+public class SVImageContril : MonoBehaviour
 {
     [SerializeField]
     private Image pickerImage;
     private RawImage SVimage;
     private ColourPickerControl CC;
     private RectTransform recTransform, pickerTransform;
+
+    [SerializeField]
+    PlayerControllerHuesAndCues playerController;
+
+    PickerFollowsCharacterScript pickerScript;
 
 
     private void Awake()
@@ -19,11 +23,22 @@ public class SVImageContril : MonoBehaviour, IDragHandler, IPointerClickHandler
 
         pickerTransform = pickerImage.GetComponent<RectTransform>();
         pickerTransform.position = new Vector2( -(recTransform.sizeDelta.x * 0.5f), -(recTransform.sizeDelta.y * 0.5f)); //Look if this pos even works
+        pickerScript = SVimage.GetComponent<PickerFollowsCharacterScript>();
     }
 
-    void UpdateColour(PointerEventData eventData)
+    private void Update()
     {
-        Vector3 pos = recTransform.InverseTransformPoint(eventData.position);
+        if (playerController != null)
+        {
+            if(playerController.IsInteractPressed() && pickerScript.IsFollowing)
+            UpdateColour();
+        }
+    }
+
+    public void UpdateColour()
+    {
+        Vector3 pos = pickerTransform.localPosition;
+
 
         float deltaX = recTransform.sizeDelta.x * 0.5f;
         float deltaY = recTransform.sizeDelta.y * 0.5f;
@@ -40,20 +55,10 @@ public class SVImageContril : MonoBehaviour, IDragHandler, IPointerClickHandler
         float xNorm = x / recTransform.sizeDelta.x;
         float yNorm = y / recTransform.sizeDelta.y;
 
-        pickerTransform.localPosition = pos;
         pickerImage.color = Color.HSVToRGB(0, 0, 1 - yNorm);
 
         CC.SetSV(xNorm, yNorm);
 
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        UpdateColour(eventData);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        UpdateColour(eventData);
-    }
 }

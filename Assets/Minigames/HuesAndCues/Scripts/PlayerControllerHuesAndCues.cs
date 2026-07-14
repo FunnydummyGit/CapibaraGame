@@ -26,7 +26,8 @@ public class PlayerControllerHuesAndCues : MonoBehaviour
     private PIHuesAndCues _playerInputActions;
     private Vector3 _input;
     private CharacterController _characterController;
-    private bool _isGrounded;
+
+
 
     private void Awake()
     {
@@ -109,5 +110,13 @@ public class PlayerControllerHuesAndCues : MonoBehaviour
         Vector2 input = _playerInputActions.Player.Move.ReadValue<Vector2>();
         _input = new Vector3(input.x, 0, input.y);
         _dashInput = _playerInputActions.Player.Sprint.IsPressed();
+       
+    }
+
+    // Expose Interact state for external components (e.g., picker controls)
+    public bool IsInteractPressed()
+    {
+        if (_playerInputActions == null) return false;
+        return _playerInputActions.Player.Interact.IsPressed();
     }
 }
