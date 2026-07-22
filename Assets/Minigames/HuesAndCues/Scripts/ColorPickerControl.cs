@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ColourPickerControl : MonoBehaviour
 {
@@ -12,13 +13,11 @@ public class ColourPickerControl : MonoBehaviour
     [SerializeField]
     private Slider hueSlider;
 
-    [SerializeField]
-    private TMP_InputField hexInputField;
-
     private Texture2D hueTexture, svTexture, outputTexture;
 
     [SerializeField]
-    MeshRenderer changeThisColour;
+    PlayerControllerHuesAndCues player;
+
 
     private void Start()
     {
@@ -63,7 +62,7 @@ public class ColourPickerControl : MonoBehaviour
         }
         svTexture.Apply();
         currentSat = 0;
-        currentVal = 0;
+        currentVal = 1;
 
         satValImage.texture = svTexture;
     }
@@ -94,7 +93,7 @@ public class ColourPickerControl : MonoBehaviour
         }
         outputTexture.Apply();
 
-        changeThisColour.material.SetColor("_BaseColor", currentColour);
+        player.ChangeColor(currentHue, currentSat, currentVal);
     }
 
     public void SetSV(float s, float v)
